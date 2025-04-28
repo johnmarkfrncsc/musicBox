@@ -1,4 +1,4 @@
-import { Calendar, Heart, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Download, Heart, Inbox, List, Search, Settings } from "lucide-react"
  
 import {
   Sidebar,
@@ -10,46 +10,47 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { link } from "fs"
  
 // Menu items.
 const items = [
   {
     title: "Liked Songs",
-    url: "#",
+    url: "Collections",
     icon: Heart,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Playlist 1",
+    url: "Playlist1",
+    icon: List,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "Playlist 2",
+    url: "Playlist2",
+    icon: List,
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Downloads",
+    url: "Downloads",
+    icon: Download,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "Settings",
     icon: Settings,
   },
 ]
  
 export function AppSidebar() {
   return (
-    <Sidebar  className="relative">
+    <Sidebar  className="absolute ">
       <SidebarContent>
-        <SidebarGroup className="bg-stone-950 text-white h-screen">
+        <SidebarGroup className="bg-stone-950  text-white h-screen relative">
           <SidebarGroupLabel className="text-xl text-white pb-10">Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.title} className="pb-2 font-semibold">
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
                       <item.icon />
