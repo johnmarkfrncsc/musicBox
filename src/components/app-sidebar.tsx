@@ -1,68 +1,85 @@
-import { Calendar, Download, Heart, Inbox, List, Search, Settings } from "lucide-react"
- 
+import * as React from "react";
+import { Bot, Heart, Frame, Map, PieChart, Settings2 } from "lucide-react";
+
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { link } from "fs"
- 
-// Menu items.
-const items = [
-  {
-    title: "Liked Songs",
-    url: "Collections",
-    icon: Heart,
-  },
-  {
-    title: "Playlist 1",
-    url: "Playlist1",
-    icon: List,
-  },
-  {
-    title: "Playlist 2",
-    url: "Playlist2",
-    icon: List,
-  },
-  {
-    title: "Downloads",
-    url: "Downloads",
-    icon: Download,
-  },
-  {
-    title: "Settings",
-    url: "Settings",
-    icon: Settings,
-  },
-]
- 
-export function AppSidebar() {
+  SidebarFooter,
+  SidebarHeader,
+  SidebarRail,
+} from "@/components/ui/sidebar";
+import { NavMain } from "./nav-main";
+
+const data = {
+  navMain: [
+    {
+      title: "Collections",
+      url: "#",
+      icon: Heart,
+      items: [
+        {
+          title: "Likes",
+          url: "#",
+        },
+        {
+          title: "Playlists1",
+          url: "#",
+        },
+        {
+          title: "Playlists2",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Explore",
+      url: "#",
+      icon: Bot,
+      items: [
+        {
+          title: "Recent",
+          url: "#",
+        },
+        {
+          title: "Remix",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Settings",
+      url: "#",
+      icon: Settings2,
+    },
+  ],
+  projects: [
+    {
+      name: "Design Engineering",
+      url: "#",
+      icon: Frame,
+    },
+    {
+      name: "Sales & Marketing",
+      url: "#",
+      icon: PieChart,
+    },
+    {
+      name: "Travel",
+      url: "#",
+      icon: Map,
+    },
+  ],
+};
+
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar  className="absolute ">
-      <SidebarContent>
-        <SidebarGroup className="bg-stone-950  text-white h-screen relative">
-          <SidebarGroupLabel className="text-xl text-white pb-10">Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title} className="pb-2 font-semibold">
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+    <Sidebar collapsible="icon" {...props} className="relative h-full  ">
+      <SidebarHeader className="bg-amber-500"></SidebarHeader>
+      <SidebarContent className="flex flex-col gap-2 overflow-hidden bg-amber-500">
+        <NavMain items={data.navMain} />
       </SidebarContent>
+      <SidebarFooter className="bg-amber-500">footer to gago</SidebarFooter>
+      <SidebarRail />
     </Sidebar>
-  )
+  );
 }
